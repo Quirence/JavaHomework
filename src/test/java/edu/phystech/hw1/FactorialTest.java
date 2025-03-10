@@ -8,23 +8,21 @@ import org.junit.jupiter.api.Assertions;
 public class FactorialTest {
 
 
-    private static long factorial(int n) {
-        return 0;
-    }
+	private static long factorial(int n) {
+		return (n == 0 || n == 1) ? 1 : n * factorial(n - 1);
+	}
 
-    @Test
-    public void smallNumbersTest() {
-        var factorials = List.of(1L, 2L, 6L, 24L, 120L, 720L, 5040L);
+	@Test public void smallNumbersTest() {
+		var factorials = List.of(1L, 2L, 6L, 24L, 120L, 720L, 5040L);
 
-        for (int i = 0; i < factorials.size(); ++i) {
-            Assertions.assertEquals(factorials.get(i), factorial(i + 1));
-        }
-    }
+		for (int i = 0; i < factorials.size(); ++i) {
+			Assertions.assertEquals(factorials.get(i), factorial(i + 1));
+		}
+	}
 
 
-    @Test
-    public void cornerCaseTest() {
-        Assertions.assertEquals(1, factorial(0));
-        Assertions.assertEquals(1, factorial(1));
-    }
+	@Test public void cornerCaseTest() {
+		Assertions.assertEquals(1, factorial(0));
+		Assertions.assertEquals(1, factorial(1));
+	}
 }
