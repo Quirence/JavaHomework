@@ -5,35 +5,26 @@ import java.util.function.Function;
 /**
  * @author kzlv4natoly
  */
-public final class Success<T> implements Result<T> {
-    private final T value;
-    public Success(T value) {
-        this.value = value;
-    }
 
-    @Override
-    public boolean isFailure() {
-        return false;
-    }
+public record Success<T>(T value) implements Result<T> {
 
-    @Override
-    public boolean isSuccess() {
-        return false;
-    }
+	@Override public boolean isFailure() {
+		return false;
+	}
 
-    @Override
-    public T getOrDefault(T defaultValue) {
-        return null;
-    }
+	@Override public boolean isSuccess() {
+		return true;
+	}
 
-    @Override
-    public Throwable getExceptionOrNull() {
-        return null;
-    }
+	@Override public T getOrDefault(T defaultValue) {
+		return value;
+	}
 
-    @Override
-    public <R> Result<R> map(Function<T, R> transform) {
-        return null;
-    }
+	@Override public Throwable getExceptionOrNull() {
+		return null;
+	}
 
+	@Override public <R> Result<R> map(Function<T, R> transform) {
+		return new Success<>(transform.apply(value));
+	}
 }
